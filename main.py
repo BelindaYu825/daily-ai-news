@@ -4,8 +4,9 @@ import os
 from datetime import datetime, timedelta
 
 # ===== 配置区 =====
-NEWSAPI_KEY = "222ddb94684b4c78b29f31e5d77a86cb"
-  # ← 一定要改这里
+NEWSAPI_KEY = os.environ.get("NEWSAPI_KEY", "")
+if not NEWSAPI_KEY:
+    raise ValueError("请在环境变量 NEWSAPI_KEY 中设置 NewsAPI 密钥")
 KEYWORDS = '"人工智能" OR "具身智能"'
 FROM_DATE = (datetime.now() - timedelta(days=2)).strftime('%Y-%m-%d')
 
